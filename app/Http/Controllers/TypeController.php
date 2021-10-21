@@ -14,7 +14,10 @@ class TypeController extends Controller
      */
     public function index()
     {
-        //
+        // komanda sortable veikia tik su biblioteka
+        // komanda sortable rikiuoja duomenis nurodomoj kolekcijoj pagal Type.php nurodytus stulpelius
+        $types=Type::sortable()->paginate(15);       // nustatomas puslapiavimas (15 psl)
+        return view ('type.index', ['types'=> $types]);
     }
 
     /**

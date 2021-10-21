@@ -3,6 +3,15 @@
 @section('content')
     <div class="container">
 
+    <form action="{{route("company.search")}}" method="GET">
+        @csrf
+
+        <input type="text" name="search" placeholder="Enter searc key"/>
+        <button type="submit">search</button>
+
+    </form>
+
+
     <form action="{{route('company.index')}}" method="GET">
         @csrf
         <select name="collumnname">

@@ -20,6 +20,7 @@ Route::get('/', function () {
 Route::prefix('companies')->group(function () {
 
     Route::get('','CompanyController@index')->name('company.index');//->middleware("auth");
+    Route::get('search','CompanyController@search')->name('company.search');//->middleware("auth");
         //Route::get('create','CompanyController@create')->name('company.create')->middleware("auth");
         //Route::post('store','CompanyController@store')->name('company.store')->middleware("auth");
         //Route::get('edit/{company}', 'CompanyController@edit')->name('company.edit')->middleware("auth");

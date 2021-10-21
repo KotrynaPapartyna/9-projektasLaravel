@@ -129,4 +129,38 @@ class CompanyController extends Controller
     {
         //
     }
+
+    // SUSIKURIAMA PAIESKA- FUNKCIJAi/ PAIESKAI
+
+    public function search(Request $request) {
+
+        //$companies=Company::paginate(15);
+
+        // filtravimas pagal type_id
+        //1.
+            // pasirenkama viskas is companies lenteles, kur type_id yra lygus 6
+            // $companies= Company::where('type_id', 6)->get();
+            // SELECT * FROM companies
+            // WHERE  type_id=6
+
+        // 2.
+            // pasiimama visa kolekcija ir tada ji yra filtruojama
+            // $companies= Company::all()->where('type_id','>', 6); tokiu atveju isfiltruojama didesni nei 6
+            // $companies= Company::all()->where('type_id', 6); // tik su 6
+
+            // jeigu pagar du parametrus- du where->
+            //$companies= Company::all()->where('type_id', '>=', 16)->where("type_id",'<=', 150);
+
+            // where type_id=151 OR type_id=152
+            //$companies= Company::all()->firstWhere('type_id', 151)->orWhere("type_id",152)->get();
+            // $companies= Company::all()->where('type_id', 151)->orWhere("type_id",152)->get();
+
+            // ieskoma rezultatu kur pavadinime yra raides han
+
+
+            $search=$request->search;
+            $companies= Company::query()->sortable()->where('title', 'LIKE', "%{$search}%")->orWhere('description', 'LIKE', "%{$search}%")->paginate(5);
+
+        return view ('company.search', ['companies'=>$companies]);
+    }
 }
